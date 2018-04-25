@@ -72,8 +72,9 @@ body {
     justify-content: space-evenly;
 }
 
-.tshirts,
-.ear-rings,
+.black-shirt,
+.white-shirt,
+.earrings,
 .legos {
     height: 200px;
     width: 200px;
@@ -119,4 +120,40 @@ body {
     display: flex;
     height: 100vh;
     width: 100vw;
+    justify-content: flex-start;
+}
+
+.content-product {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 30px 30px 30px;
+    align-items: center;
+}
+
+.product-img {
+    height: 200px;
+    width: 200px;
+    border: solid 1px gray;
+    text-align: center;
+}
+
+
+/* ProductDetailPage.js */
+
+.product-details {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-details div {
+    display: flex;
+}
+
+.product-details img {
+    height: 500px;
+    width: 500px;
+    border: solid 1px lightgray;
 }

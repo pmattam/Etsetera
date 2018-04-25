@@ -1,4 +1,11 @@
-import { FETCH_CATEGORIES, FETCH_PRODUCTS } from "../constants/index";
+import { ADD_PRODUCT_TO_CART, FETCH_CATEGORIES, FETCH_PRODUCTS } from "../constants/index";
+
+export let addToCart = (product) => ({
+    type: ADD_PRODUCT_TO_CART,
+    payload: { product }
+});
+
+addToCart.toString = () => ADD_PRODUCT_TO_CART;
 
 export let fetchCategories = (categories) => ({
     type: FETCH_CATEGORIES,

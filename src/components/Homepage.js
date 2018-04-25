@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 class HomepageWrapper extends Component {
     componentDidMount() {
         this.props.fetchCategories(categories);
+        this.props.fetchProducts(products);
     }
     render() {
         console.log(this.props);
@@ -22,17 +23,15 @@ class HomepageWrapper extends Component {
                     </div>
                     <div className="category-type">
                         {
-                            categories.map(category => {
-                            { 
-                                return <div className={category.name.toLowerCase()}>
-                                    <Link to={`/category/${category.name}`}>
-                                    {
-                                        category.name
-                                    }
-                                    </Link>
-                                </div>
-                            }   
-                            })
+                            categories.map(category => { 
+                                    return <div className={category.name.toLowerCase()}>
+                                        <Link to={`/category/${category.name}`}>
+                                        {
+                                            category.name
+                                        }
+                                        </Link>
+                                    </div>
+                                })  
                         }
                     </div>
                 </div>
@@ -40,16 +39,16 @@ class HomepageWrapper extends Component {
                     <div className="products-heading">
                         <h1>Shop By Products</h1>
                     </div>
-                    <div>
+                    <div className="products-type"> 
                         {
                             products.map(product => {
-                                { 
-                                    return <div>
+                                return <div className={product.name.toLowerCase()}>
+                                    <Link to={`/product/${product.name}`}>
                                     {
                                         product.name
                                     }
-                                    </div>
-                                }   
+                                    </Link>
+                                </div>   
                             })
                         }
                     </div>

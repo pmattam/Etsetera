@@ -1,8 +1,9 @@
 import React from'react';
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 import "../index.css";
 
-let Navbar = () =>
+let NavbarWrapper = ({ cart }) =>
     <div className="navbar"> 
         <div className="app-name">
             <Link className="app-name-link" to="/">Etsetera</Link>
@@ -11,8 +12,13 @@ let Navbar = () =>
             <Link className="sign-in-link" to="/login">SignIn</Link>
         </div>
         <div className="cart">
-            <Link className="cart-link" to="/cart">cart</Link>
+            <Link className="cart-link" to="/cart">cart{cart.length}</Link>
         </div>
     </div>
+
+
+let mapStateToProps = state => ({ cart: state.cart });
+
+let Navbar = connect(mapStateToProps)(NavbarWrapper);
 
 export default Navbar;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 class CategoryWrapper extends Component {
 
@@ -10,7 +11,8 @@ class CategoryWrapper extends Component {
         let categories = this.props.categories;
         let products = this.props.products;
 
-
+        let categoryId = categories.filter(category => category.name === category_name)[0].id;
+        let categoryProductsList = products.filter(product => product.categoryId === categoryId);
 
         return(
             <div className="main-category-div">
@@ -19,12 +21,43 @@ class CategoryWrapper extends Component {
                 </div>
                 <div className="category-sidebar-content">
                     <div className="sidebar">
-                        <div className="">sidebar</div>
+                        <div className="">
+                            {
+                                categories.map(category => 
+                                    {
+                                        return (
+                                        <div>
+                                            <div>{ category.name }</div>
+                                            <div>{products.filter(product => product.categoryId === category.id).length}</div>
+                                        </div>
+                                        )
+                                    }  
+                                )
+                            }
                         </div>
+                    </div>
                     <div className="content">
-                        <div>
-                            categories
-                        </div>
+                        {
+                            categoryProductsList.map(product => {
+                                return <div className="content-product">
+                                    <div className="product-img">
+                                        <Link to={`/product/${product.id}`}>
+                                            <img className="item-image" src={`../..${product.img}`} alt={product.name}/>
+                                        </Link>
+                                    </div>
+                                    <div className="product-name">
+                                        {
+                                            product.name
+                                        }
+                                    </div>
+                                    <div className="product-price">
+                                        {
+                                            product.price
+                                        }
+                                    </div>
+                                </div>
+                            })
+                        }
                     </div>
                 </div>
             </div>
@@ -34,6 +67,6 @@ class CategoryWrapper extends Component {
 
 let mapStateToProps = state => ({ categories: state.categories, products: state.products });
   
-let Category = connect(mapStateToProps, mapDispatchToProps)(CategoryWrapper)
+let Category = connect(mapStateToProps)(CategoryWrapper)
 
 export default Category;

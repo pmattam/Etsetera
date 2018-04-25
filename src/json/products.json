@@ -1,5 +1,6 @@
 [
     { "id": 1, "name": "Earrings", "categoryId": 2, "price": 19.99 },
     { "id": 2, "name": "Legos", "categoryId": 3, "price": 9.99 },
-    { "id": 3, "name": "T-shirts", "categoryId": 1, "price": 19.99 }
+    { "id": 3, "name": "black-shirt", "categoryId": 1, "price": 19.99, "img": "/public/images/black-tshirt.jpg" },
+    { "id": 4, "name": "white-shirt", "categoryId": 1, "price": 19.99, "img": "/public/images/white-tshirt.jpg" }
 ]
