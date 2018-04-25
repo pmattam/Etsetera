@@ -12,7 +12,7 @@ let NavbarWrapper = ({ cart }) =>
             <Link className="sign-in-link" to="/login">SignIn</Link>
         </div>
         <div className="cart">
-            <Link className="cart-link" to="/cart">cart{cart.length}</Link>
+            <Link className="cart-link" to="/cart"><img className="cart-img" src="images/shopping_cart.svg" alt="cart"/>{cart.length}</Link>
         </div>
     </div>
 

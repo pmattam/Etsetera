@@ -8,9 +8,9 @@ import reducer from "./reducers/index"
 
 const store = createStore(reducer);
 
-let reactAppreduxStore = 
+let reactAppReduxStore = 
     <Provider store={store}>
         <Routes />
     </Provider>
 
-ReactDOM.render( reactAppreduxStore, document.getElementById('root'));
+ReactDOM.render( reactAppReduxStore, document.getElementById('root'));

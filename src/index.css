@@ -5,6 +5,9 @@ body {
     display: flex;
 }
 
+
+/* Navbar.js */
+
 .navbar {
     height: 80px;
     width: 100vw;
@@ -21,7 +24,16 @@ body {
 }
 
 .cart {
-    border-left: solid 1px lightgray;
+    display: flex;
+    height: 80px;
+    width: 80px;
+    justify-content: center;
+}
+
+.cart-img {
+    display: flex;
+    height: 20px;
+    width: 20px;
 }
 
 .main-homepage {
@@ -55,6 +67,12 @@ body {
     border: solid 1px lightgray;
 }
 
+.category-image {
+    height: 200px;
+    width: 200px;
+    border: solid 1px lightgray;
+}
+
 
 /* Homepage - shop by products */
 
@@ -72,16 +90,39 @@ body {
     justify-content: space-evenly;
 }
 
-.black-shirt,
+
+/* .black-shirt,
 .white-shirt,
 .earrings,
-.legos {
+.legos, */
+
+.each-products {
+    height: 300px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+}
+
+.product-image {
+    display: flex;
     height: 200px;
     width: 200px;
     border: solid 1px lightgray;
 }
 
-.clothing-link,
+.product-name {
+    display: flex;
+    justify-content: center;
+}
+
+.product-price {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* .clothing-link,
 .jewelry-link,
 .toys-link {
     text-decoration: none;
@@ -91,7 +132,7 @@ body {
 .ear-rings-link,
 .legos-link {
     text-decoration: none;
-}
+} */
 
 
 /* Category.js */
@@ -130,7 +171,15 @@ body {
     align-items: center;
 }
 
-.product-img {
+
+/* .product-img {
+    height: 200px;
+    width: 200px;
+    border: solid 1px gray;
+    text-align: center;
+} */
+
+.item-image {
     height: 200px;
     width: 200px;
     border: solid 1px gray;
@@ -152,8 +201,17 @@ body {
     display: flex;
 }
 
-.product-details img {
+
+/* .product-details img { */
+
+.detail-page-image {
     height: 500px;
     width: 500px;
+    border: solid 1px lightgray;
+}
+
+.addcart-bt {
+    height: 40px;
+    width: 80px;
     border: solid 1px lightgray;
 }
