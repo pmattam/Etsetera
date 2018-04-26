@@ -1,3 +1,8 @@
+export let addToCartReducer = (state, action) => ({
+    ...state,
+    cart: state.cart.concat(action.payload.product)
+});
+
 export let fetchCategoriesReducer = (state, action) => ({
     ...state,
     categories: action.payload.categories
@@ -8,7 +13,7 @@ export let fetchProductsReducer = (state, action) => ({
     products: action.payload.products
 });
 
-export let addToCartReducer = (state, action) => ({
+export let tokenToStoreReducer = (state, action) => ({
     ...state,
-    cart: state.cart.concat(action.payload.product)
+    users: state.users.concat(action.payload)
 })

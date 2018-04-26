@@ -15,19 +15,25 @@ class HomepageWrapper extends Component {
         getCategories()
             .then(res => res.json())
             .then(categories => { 
-                // console.log("Categories", categories);
+                console.log("FETCHED CATEGORIES", categories);
                 this.props.fetchCategories(categories);
             })
         getProducts()
             .then(res => res.json())
             .then(products => {
-                // console.log("Products",products);
+                console.log("FETCHED PRODUCTS",products);
                 this.props.fetchProducts(products);
             })
     }
+
     render() {
         let categories = this.props.categories;
         let products = this.props.products;
+
+        console.log("CATs", this.props.categories);
+        console.log("PRODs", this.props.products);
+        console.log("USERs", this.props.users);
+        console.log("CART", this.props.cart);
 
         return(
             <div className="main-homepage">
@@ -60,7 +66,7 @@ class HomepageWrapper extends Component {
                                 return <div className="each-products">
                                     <div>
                                         <Link to={`/product/${ product.id }`}>
-                                            <img className="product-image" src={ product.img } alt={ product.title }/>
+                                            <img className="product-image" src={ product.images[0].url } alt={ product.title }/>
     
                                         </Link>
                                     </div>
@@ -84,7 +90,7 @@ class HomepageWrapper extends Component {
     }
 }
     
-let mapStateToProps = state => ({ categories: state.categories, products: state.products });
+let mapStateToProps = state => ({ categories: state.categories, products: state.products, users: state.users, cart: state.cart });
 
 let mapDispatchToProps = dispatch => { 
     return { 
@@ -93,7 +99,7 @@ let mapDispatchToProps = dispatch => {
     };
 };
       
-let Homepage = connect(mapStateToProps, mapDispatchToProps)(HomepageWrapper)
+let Homepage = connect(mapStateToProps, mapDispatchToProps)(HomepageWrapper);
 
 export default Homepage;
 

@@ -12,7 +12,10 @@ let NavbarWrapper = ({ cart }) =>
             <Link className="sign-in-link" to="/login">SignIn</Link>
         </div>
         <div className="cart">
-            <Link className="cart-link" to="/cart"><img className="cart-img" src="images/shopping_cart.svg" alt="cart"/>{cart.length}</Link>
+            <Link className="cart-link" to="/cart">
+                <img className="cart-img" src="images/shopping_cart.svg" alt="cart"/>
+                    {cart.length || null}
+            </Link>
         </div>
     </div>
 
@@ -22,3 +25,6 @@ let mapStateToProps = state => ({ cart: state.cart });
 let Navbar = connect(mapStateToProps)(NavbarWrapper);
 
 export default Navbar;
+
+// cart.length ? cart.length : null
+// cart.length || null

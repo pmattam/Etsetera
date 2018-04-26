@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { addToCart } from "../actions/action-functions";
 import Navbar from "./Navbar";
 
@@ -22,10 +23,10 @@ let ProductDetailPageWrapper = ({ cart, products, props, addToCart }) => {
         <div className="product-details">
             <Navbar />
             <div>
-                <h1>{product.title}</h1>
+                <h1>{ product.title }</h1>
             </div>
             <div>
-                <img className="detail-page-image" src={product.img} alt={product.title}/>
+                <img className="detail-page-image" src={ product.images[0].url } alt={ product.title }/>
             </div>
             <div>
                 Price: 
@@ -34,12 +35,14 @@ let ProductDetailPageWrapper = ({ cart, products, props, addToCart }) => {
                 }
             </div>
             <div>
-                <button className="addcart-bt" onClick={handleAddToCart}> Add To Cart</button>
+                <Link to={`/cart/${ product.id }`}>
+                    <button className="addcart-bt" onClick={ handleAddToCart }> Add To Cart</button>
+                </Link>
             </div>
         </div>
     )
 
-}
+};
 
 let mapStateToProps = (state, props) => ({ cart: state.cart, products: state.products, props });
 

@@ -1,18 +1,19 @@
-import { addToCart, fetchCategories, fetchProducts } from "../actions/action-functions";
-import { addToCartReducer, fetchCategoriesReducer, fetchProductsReducer } from "./reducer-functions";
-import users from "../json/users";
+import { addToCart, fetchCategories, fetchProducts, tokenToStore } from "../actions/action-functions";
+import { addToCartReducer, fetchCategoriesReducer, fetchProductsReducer, tokenToStoreReducer } from "./reducer-functions";
+// import users from "../json/users";
 
 const initialState = {
     cart: [],
     categories: [],
     products: [],
-    users: users
+    users: []
 };
 
 let reducers = {
     [addToCart]: addToCartReducer,
     [fetchCategories]: fetchCategoriesReducer,
-    [fetchProducts]: fetchProductsReducer
+    [fetchProducts]: fetchProductsReducer,
+    [tokenToStore]: tokenToStoreReducer
 };
 
 let fallbackReducer = state => state;
