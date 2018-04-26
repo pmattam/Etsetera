@@ -1,12 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Link } from 'react-router-dom';
 import { tokenToStore } from "../actions/action-functions";
 import { registerUser } from "../lib/helper-functions";
 
 let RegisterUserWrapper = ({ users, props }) => {
-
-    console.log("USERS", users);
 
     let userCredentials = {};
      
@@ -20,6 +17,7 @@ let RegisterUserWrapper = ({ users, props }) => {
                     console.log("RES", response);
                     if(response.jwt) {
                         console.log(response.jwt);
+                        localStorage.setItem("authorization", response.jwt);
                         tokenToStore(response.user.email, response.jwt);
                         console.log(props);
                         props.history.push("/");
@@ -75,11 +73,7 @@ let RegisterUserWrapper = ({ users, props }) => {
 
 let mapStateToProps = (state, props) => ({ users: state.users, props });
 
-let mapDispatchToProps = dispatch => { 
-    return { 
-        tokenToStore: (identifier, token) => dispatch(tokenToStore(identifier, token))
-    };
-};
+let mapDispatchToProps = dispatch => ({ tokenToStore: (identifier, token) => dispatch(tokenToStore(identifier, token)) })
       
 let RegisterUser = connect(mapStateToProps, mapDispatchToProps)(RegisterUserWrapper)
 

@@ -13,7 +13,10 @@ export let fetchProductsReducer = (state, action) => ({
     products: action.payload.products
 });
 
-export let tokenToStoreReducer = (state, action) => ({
-    ...state,
-    users: state.users.concat(action.payload)
-})
+export let tokenToStoreReducer = (state, action) => {
+    console.log("action", action.payload);
+    return {
+        ...state,
+        user: state.user.concat(action.payload)
+    }
+}

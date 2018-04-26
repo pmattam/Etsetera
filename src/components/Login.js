@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { tokenToStore } from "../actions/action-functions";
 import { Link } from 'react-router-dom';
 
-let LoginWrapper = ({ props }) => {
-    console.log("props in the beginning", props);
+let LoginWrapper = ({ props, tokenToStore }) => {
+
     let userCredentials = {};
     
     let handleSubmit = event => {
@@ -16,9 +16,8 @@ let LoginWrapper = ({ props }) => {
                 .then(res => res.json())
                 .then(token => {
                     if(token.jwt) {
-                        console.log(token.jwt);
-                        tokenToStore(userCredentials.identifier, token.jwt);
-                        console.log(props);
+                        localStorage.setItem("authorization", token.jwt);
+                        tokenToStore(userCredentials.identifier, token.jwt, token.user._id);
                         props.history.push("/");
                     } else {
                         alert("Can't log you in");
@@ -68,9 +67,9 @@ let LoginWrapper = ({ props }) => {
 
 let mapStateToProps = (state, props) => ({ state, props });
 
-let mapDispatchToProps = dispatch => { 
-    return { 
-        tokenToStore: (identifier, token) => dispatch(tokenToStore(identifier, token))
+let mapDispatchToProps = dispatch =>  { 
+    return {
+        tokenToStore: (identifier, token, userid) => dispatch(tokenToStore(identifier, token, userid))
     };
 };
       

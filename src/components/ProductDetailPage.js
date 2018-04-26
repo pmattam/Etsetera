@@ -1,10 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { addToCart } from "../actions/action-functions";
 import Navbar from "./Navbar";
 
-let ProductDetailPageWrapper = ({ cart, products, props, addToCart }) => {
+let ProductDetailPageWrapper = ({ products, user, props, addToCart }) => {
+
+    let quantity = "";
+
+    console.log("Entire User Array", user[0]);
 
     console.log("PRODUCTS", products);
     console.log("PROPS", props);
@@ -13,11 +17,24 @@ let ProductDetailPageWrapper = ({ cart, products, props, addToCart }) => {
     console.log(typeof(productId));
     let product = products.find(productObj => productObj.id === productId);
     console.log("PRODUCT OBJECT",product);
+
+    let handleQuantity = (event) => {
+        console.log("Quantity", typeof(event.target.value));
+        quantity = event.target.value;
+        // handleAddToCart
+    };
     
-    let handleAddToCart = (product) => {
+    let handleAddToCart = (product, ) => {
         console.log("Entire Product", product);
+        console.log("How many", quantity);
+        product.quantity = quantity;
+        let token = localStorage.getItem("authorization");
+        let user_id = user[0]._id;
+        console.log("token", token);
+        console.log(user_id);
+        console.log("product after adding quantity", product.quantity);
         addToCart(product);
-    }
+    };
 
     return (
         <div className="product-details">
@@ -35,16 +52,23 @@ let ProductDetailPageWrapper = ({ cart, products, props, addToCart }) => {
                 }
             </div>
             <div>
-                <Link to={`/cart/${ product.id }`}>
-                    <button className="addcart-bt" onClick={ handleAddToCart }> Add To Cart</button>
-                </Link>
+                <button className="addcart-bt" onClick={ handleAddToCart }> Add To Cart</button>
+            </div>
+            <div>
+                <select onChange={handleQuantity}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
         </div>
     )
 
 };
 
-let mapStateToProps = (state, props) => ({ cart: state.cart, products: state.products, props });
+let mapStateToProps = (state, props) => ({ products: state.products, user: state.user, props });
 
 let mapDispatchToProps = dispatch => {
     return {
@@ -55,3 +79,4 @@ let mapDispatchToProps = dispatch => {
 let ProductDetailPage = connect(mapStateToProps, mapDispatchToProps)(ProductDetailPageWrapper);
 
 export default ProductDetailPage;
+

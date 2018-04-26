@@ -15,13 +15,13 @@ class HomepageWrapper extends Component {
         getCategories()
             .then(res => res.json())
             .then(categories => { 
-                console.log("FETCHED CATEGORIES", categories);
+                // console.log("FETCHED CATEGORIES", categories);
                 this.props.fetchCategories(categories);
             })
         getProducts()
             .then(res => res.json())
             .then(products => {
-                console.log("FETCHED PRODUCTS",products);
+                // console.log("FETCHED PRODUCTS",products);
                 this.props.fetchProducts(products);
             })
     }
@@ -30,10 +30,10 @@ class HomepageWrapper extends Component {
         let categories = this.props.categories;
         let products = this.props.products;
 
-        console.log("CATs", this.props.categories);
-        console.log("PRODs", this.props.products);
-        console.log("USERs", this.props.users);
-        console.log("CART", this.props.cart);
+        // console.log("CATs", this.props.categories);
+        // console.log("PRODs", this.props.products);
+        // console.log("USERs", this.props.users);
+        // console.log("CART", this.props.cart);
 
         return(
             <div className="main-homepage">

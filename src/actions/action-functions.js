@@ -21,9 +21,20 @@ export let fetchProducts = (products) => ({
 
 fetchProducts.toString = () => FETCH_PRODUCTS;
 
-export let tokenToStore = () => (identifier, token) => ({
-    type: TOKEN_TO_STORE,
-    payload: { identifier, token }
-});
+// export let tokenToStore = () => (identifier, token, userid) => {
+//     console.log("DETAILS", identifier, token, userid);
+//     return {
+//         type: TOKEN_TO_STORE,
+//         payload: { identifier, token, userid }
+//     }
+// };
+
+export let tokenToStore = (identifier, token, userid) => {
+    console.log("DETAILS", identifier, token, userid);
+    return {
+        type: TOKEN_TO_STORE,
+        payload: { identifier, token, userid }
+    }
+};
 
 tokenToStore.toString = () => TOKEN_TO_STORE;

@@ -1,3 +1,9 @@
+export let addItemToUserCart = (product) =>
+    fetch("https://etsetera.herokuapp.com/cartItem", {
+        method: "POST",
+        body: JSON.stringify()
+    })
+
 export let fetchToken = (userCredentials) =>
     fetch("https://etsetera.herokuapp.com/auth/local", {
         method: "POST",
@@ -21,3 +27,17 @@ export let registerUser = (userCredentials) =>
             "Content-Type": "application/json"
         })
     })
+
+
+// POST https: //etsetera.herokuapp.com/cartItem
+
+//     Headers ===
+//     === =
+//     Authorization: Bearer y0url0ngjs0nw3bt0k3n
+
+// Body(JSON) ===
+//     === === == {
+//         "quantity": 2,
+//         "productId": "5ae0a5dddd0ecc0014542d0f",
+//         "userId": "5ae0a5aedd0ecc0014542d0e"
+//     }
