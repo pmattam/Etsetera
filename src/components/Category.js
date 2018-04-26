@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import Navbar from "./Navbar";
 
 let CategoryWrapper = ({ categories, products, props }) => {
-
+    console.log("Props", props);
     let category_name = props.match.params.name;
     let categoryName = category_name.charAt(0).toUpperCase() + category_name.slice(1);
 
-    let categoryId = categories.filter(category => category.name === category_name)[0].id;
-    let categoryProductsList = products.filter(product => product.categoryId === categoryId);
+    let categoryId = categories.filter(category => category.title === category_name)[0].id;
+    let categoryProductsList = products.filter(product => product.category.id === categoryId);
 
     return(
         <div className="main-category-div">
@@ -25,8 +25,8 @@ let CategoryWrapper = ({ categories, products, props }) => {
                                 {
                                     return (
                                     <div>
-                                        <div>{ category.name }</div>
-                                        <div>{products.filter(product => product.categoryId === category.id).length}</div>
+                                        <div>{ category.title }</div>
+                                        <div>{products.filter(product => product.category.id === category.id).length}</div>
                                     </div>
                                     )
                                 }  
@@ -40,12 +40,12 @@ let CategoryWrapper = ({ categories, products, props }) => {
                             return <div className="content-product">
                                 <div className="product-img">
                                     <Link to={`/product/${product.id}`}>
-                                        <img className="item-image" src={product.img} alt={product.name}/>
+                                        <img className="item-image" src={product.img} alt={product.title}/>
                                     </Link>
                                 </div>
                                 <div className="product-name">
                                     {
-                                        product.name
+                                        product.description
                                     }
                                 </div>
                                 <div className="product-price">

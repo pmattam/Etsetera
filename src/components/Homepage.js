@@ -1,15 +1,29 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import categories from "../json/categories";
-import products from "../json/products";
+// import categories from "../json/categories";
+// import products from "../json/products";
 import { fetchCategories, fetchProducts } from "../actions/action-functions";
+import { getCategories, getProducts } from "../lib/helper-functions"
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
+// import { getProducts } from "../lib/helper-functions";
 
 class HomepageWrapper extends Component {
     componentDidMount() {
-        this.props.fetchCategories(categories);
-        this.props.fetchProducts(products);
+        // this.props.fetchCategories(categories);
+        // this.props.fetchProducts(products);
+        getCategories()
+            .then(res => res.json())
+            .then(categories => { 
+                // console.log("Categories", categories);
+                this.props.fetchCategories(categories);
+            })
+        getProducts()
+            .then(res => res.json())
+            .then(products => {
+                // console.log("Products",products);
+                this.props.fetchProducts(products);
+            })
     }
     render() {
         let categories = this.props.categories;
@@ -25,9 +39,10 @@ class HomepageWrapper extends Component {
                     <div className="category-type">
                         {
                             categories.map(category => { 
-                                return <div className={category.name.toLowerCase()}>
-                                    <Link to={`/category/${category.name}`}>
-                                        <img className="category-image" src={ category.img }alt={ category.name }/>
+                                // return <div className={category.title.toLowerCase()}>
+                                return <div className="each-categories">
+                                    <Link to={`/category/${category.title}`}>
+                                        <img className="category-image" src={ category.img } alt={ category.title }/>
                                     </Link>
                                 </div>
                             })  
@@ -44,13 +59,14 @@ class HomepageWrapper extends Component {
                                 // return <div className={product.name.toLowerCase()}>
                                 return <div className="each-products">
                                     <div>
-                                        <Link to={`/product/${product.id}`}>
-                                            <img className="product-image" src={product.img} alt={product.name}/>
+                                        <Link to={`/product/${ product.id }`}>
+                                            <img className="product-image" src={ product.img } alt={ product.title }/>
+    
                                         </Link>
                                     </div>
                                     <div className="product-name"> 
                                         {
-                                            product.name
+                                            product.description
                                         }
                                     </div>
                                     <div className="product-price">
@@ -80,3 +96,4 @@ let mapDispatchToProps = dispatch => {
 let Homepage = connect(mapStateToProps, mapDispatchToProps)(HomepageWrapper)
 
 export default Homepage;
+

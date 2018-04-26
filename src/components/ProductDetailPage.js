@@ -5,32 +5,39 @@ import Navbar from "./Navbar";
 
 let ProductDetailPageWrapper = ({ cart, products, props, addToCart }) => {
 
+    console.log("PRODUCTS", products);
+    console.log("PROPS", props);
+
     let productId = props.match.params.id;
-    let product = products.filter(productObj => productObj.id === parseInt(productId, 10))[0];
+    console.log(typeof(productId));
+    let product = products.find(productObj => productObj.id === productId);
+    console.log("PRODUCT OBJECT",product);
     
     let handleAddToCart = (product) => {
-        console.log("CART DETAILS", cart);
+        console.log("Entire Product", product);
         addToCart(product);
     }
 
-    return <div className="product-details">
-        <Navbar />
-        <div>
-            <h1>{product.name}</h1>
+    return (
+        <div className="product-details">
+            <Navbar />
+            <div>
+                <h1>{product.title}</h1>
+            </div>
+            <div>
+                <img className="detail-page-image" src={product.img} alt={product.title}/>
+            </div>
+            <div>
+                Price: 
+                {
+                    product.price
+                }
+            </div>
+            <div>
+                <button className="addcart-bt" onClick={handleAddToCart}> Add To Cart</button>
+            </div>
         </div>
-        <div>
-            <img className="detail-page-image" src={product.img} alt={product.name}/>
-        </div>
-        <div>
-            Price: 
-            {
-                product.price
-            }
-        </div>
-        <div>
-            <button className="addcart-bt" onClick={handleAddToCart}> Add To Cart</button>
-        </div>
-    </div>
+    )
 
 }
 
