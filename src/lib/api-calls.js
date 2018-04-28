@@ -16,21 +16,22 @@ export let addItemToUserCart = (itemToCart, token_val) =>
         })
     })
 
-export let editQuantityInUserCart = (itemToEdit, token_val) => {
+export let editQuantityInUserCart = (itemToEdit) => {
+    console.log("ITEMTOEDIT", itemToEdit);
     let bodyObj = {};
     bodyObj.quantity = itemToEdit.quantity;
-    return fetch(`"https://etsetera.herokuapp.com/cartItem/"${itemToEdit.productId}`, {
+    return fetch(`https://etsetera.herokuapp.com/cartItem/${itemToEdit.id}`, {
         method: "PUT",
         body: JSON.stringify(bodyObj),
         headers: new Headers({
-            "Authorization": `Bearer ${token_val}`,
+            "Authorization": `Bearer ${localStorage.getItem("authorization")}`,
             "Content-Type": "application/json"
         })
     })
 }
 
 export let removeItemFromUserCart = (productId, token_val) =>
-    fetch(`"https://etsetera.herokuapp.com/cartItem/"${productId}`, {
+    fetch(`https://etsetera.herokuapp.com/cartItem/${productId}`, {
         method: "DELETE",
         headers: new Headers({
             "Authorization": `Bearer ${token_val}`,

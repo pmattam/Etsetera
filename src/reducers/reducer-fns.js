@@ -3,6 +3,14 @@ export let addToCartReducer = (state, action) => ({
     cart: state.cart.concat(action.payload)
 });
 
+export let editCartReducer = (state, action) => {
+    let newCartItem = state.cart.filter(item => item._id === action.payload.itemToEdit.id)[0];
+    newCartItem.quantity = action.payload.itemToEdit.quantity;
+    return {...state,
+        cart: state.cart.map((cartItem) => cartItem._id === action.payload.itemToEdit.id ? newCartItem : cartItem)
+    };
+};
+
 export let fetchAllCartItemsReducer = (state, action) => ({
     ...state,
     cart: action.payload.cartItems

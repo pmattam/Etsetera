@@ -7,14 +7,12 @@ export let addToCart = (product, qty) => ({
 
 addToCart.toString = () => ADD_TO_CART;
 
-
-export let editCart = (editItem) => ({
+export let editCart = (itemToEdit) => ({
     type: EDIT_CART,
-    payload: { editItem }
+    payload: { itemToEdit }
 });
 
 editCart.toString = () => EDIT_CART;
-
 
 export let removeCart = (cartItem) => ({
     type: REMOVE_CART,

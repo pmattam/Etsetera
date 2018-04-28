@@ -4,29 +4,31 @@ import Navbar from "./Navbar";
 import { editCart, removeCart } from "../actions/action-fns";
 import { editQuantityInUserCart, removeItemFromUserCart } from "../lib/api-calls";
 
-let CartWrapper = ({ cart, products, props }) => {
+let CartWrapper = ({ cart, products, props, editCart }) => {
     let itemToEdit = {};
     let qty = "1";
-    //let productId = props.match.params.id;
-    //let product = products.find(productObj => productObj.id === productId);
 
     console.log("cart products", products);
     console.log("cart", cart);
 
     let handleQuantity = (event) => {
         qty = event.target.value;
+        console.log("QUANTITY", qty);
     };
     
     let handleEditCartItem = (event, product, cartItem) => {
-        itemToEdit.quantity = qty;
-        itemToEdit.productId = product._id;
+        itemToEdit.quantity = parseInt(qty, 10);
+        //itemToEdit.productId = product._id;
+        itemToEdit.id = cartItem._id;
         itemToEdit.userId = cartItem.user._id;
-        let token_val = localStorage.getItem("authorization");
-        editQuantityInUserCart(itemToEdit, token_val)
+        console.log("inside cart", itemToEdit);
+        // let token_val = localStorage.getItem("authorization");
+        editQuantityInUserCart(itemToEdit)
             .then(res => res.json())
             .then(response => {
-                editCart(itemToEdit)
-                // props.history.push("/cart");
+                console.log("response", response);
+                editCart(itemToEdit);
+                props.history.push("/cart");
             })
     };
 
@@ -35,8 +37,8 @@ let CartWrapper = ({ cart, products, props }) => {
         removeItemFromUserCart(cartItem._id, token_val)
             .then(res => res.json())
             .then(response => {
-                removeCart(cartItem)
-                // props.history.push("/cart");
+                removeCart(cartItem);
+                props.history.push("/cart");
             })
     };
 
@@ -49,11 +51,10 @@ let CartWrapper = ({ cart, products, props }) => {
             {
             cart.map(cartItem => {
                 let product = products.filter(product => product._id === cartItem.product._id)[0];
-                // let product = {}
                 return <div>
                     <div>Product: {product.title}</div>
                     <div>
-                        <select value={cartItem.quantity} onChange={handleQuantity}>
+                        <select onChange={handleQuantity}>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -81,6 +82,8 @@ let CartWrapper = ({ cart, products, props }) => {
 
 let mapStateToProps = (state, props) => ({ cart: state.cart, products: state.products, props });
 
-let Cart = connect(mapStateToProps)(CartWrapper);
+let mapDispatchToProps = dispatch => ({ editCart: (itemToEdit) => dispatch(editCart(itemToEdit)) });
+
+let Cart = connect(mapStateToProps, mapDispatchToProps)(CartWrapper);
 
 export default Cart;
