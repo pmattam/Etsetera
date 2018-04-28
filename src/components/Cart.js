@@ -54,7 +54,7 @@ let CartWrapper = ({ cart, products, props, editCart }) => {
                 return <div>
                     <div>Product: {product.title}</div>
                     <div>
-                        <select onChange={handleQuantity}>
+                        <select value={cartItem.quantity} onChange={handleQuantity}>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
