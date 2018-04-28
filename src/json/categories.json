@@ -1,5 +1,0 @@
-[
-    { "id": 1, "name": "Clothing", "img": "/images/clothes.jpg" },
-    { "id": 2, "name": "Jewelry", "img": "/images/jewelry.jpg" },
-    { "id": 3, "name": "Toys", "img": "/images/toys.jpg" }
-]

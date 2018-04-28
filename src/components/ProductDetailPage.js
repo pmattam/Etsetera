@@ -1,39 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
-import { addToCart } from "../actions/action-functions";
+import { addToCart } from "../actions/action-fns";
+import { addItemToUserCart } from "../lib/api-calls";
 import Navbar from "./Navbar";
 
-let ProductDetailPageWrapper = ({ products, user, props, addToCart }) => {
+let ProductDetailPageWrapper = ({ cart, products, user, props, addToCart }) => {
 
-    let quantity = "";
-
-    console.log("Entire User Array", user[0]);
-
-    console.log("PRODUCTS", products);
-    console.log("PROPS", props);
-
+    let itemToCart = {};
+    let qty = "1";
     let productId = props.match.params.id;
-    console.log(typeof(productId));
-    let product = products.find(productObj => productObj.id === productId);
-    console.log("PRODUCT OBJECT",product);
+    let product = products.find(productObj => productObj._id === productId);
 
     let handleQuantity = (event) => {
-        console.log("Quantity", typeof(event.target.value));
-        quantity = event.target.value;
-        // handleAddToCart
+        qty = event.target.value;
     };
     
-    let handleAddToCart = (product, ) => {
-        console.log("Entire Product", product);
-        console.log("How many", quantity);
-        product.quantity = quantity;
-        let token = localStorage.getItem("authorization");
-        let user_id = user[0]._id;
-        console.log("token", token);
-        console.log(user_id);
-        console.log("product after adding quantity", product.quantity);
-        addToCart(product);
+    let handleAddToCart = (event, product) => {
+        console.log("ALL THE PRODUCTS", product);
+        console.log("USER ID", user[0].userId);
+        itemToCart.quantity = qty;
+        itemToCart.product = { "_id": product._id };
+        itemToCart.user = { "_id": user[0].userId };
+        let token_val = localStorage.getItem("authorization");
+        console.log(itemToCart);
+        addItemToUserCart(itemToCart, token_val)
+            .then(res => res.json())
+            .then(response => {
+                addToCart(product, qty)
+                props.history.push("/cart");
+            })
     };
 
     return (
@@ -42,18 +37,22 @@ let ProductDetailPageWrapper = ({ products, user, props, addToCart }) => {
             <div>
                 <h1>{ product.title }</h1>
             </div>
+
             <div>
-                <img className="detail-page-image" src={ product.images[0].url } alt={ product.title }/>
+                <img className="detail-page-image" src={ `/images/${product.title}.jpg` } alt={ product.title }/>
             </div>
+
             <div>
                 Price: 
                 {
                     product.price
                 }
             </div>
+
             <div>
-                <button className="addcart-bt" onClick={ handleAddToCart }> Add To Cart</button>
+                <button className="addcart-bt" onClick={ event => handleAddToCart(event, product) }> Add To Cart</button>
             </div>
+
             <div>
                 <select onChange={handleQuantity}>
                     <option value="1">1</option>
@@ -65,16 +64,11 @@ let ProductDetailPageWrapper = ({ products, user, props, addToCart }) => {
             </div>
         </div>
     )
-
 };
 
-let mapStateToProps = (state, props) => ({ products: state.products, user: state.user, props });
+let mapStateToProps = (state, props) => ({ cart: state.cart, products: state.products, user: state.user, props });
 
-let mapDispatchToProps = dispatch => {
-    return {
-        addToCart: product => dispatch(addToCart(product))
-    };
-};
+let mapDispatchToProps = dispatch => ({ addToCart: (product, qty) => dispatch(addToCart(product, qty)) });
 
 let ProductDetailPage = connect(mapStateToProps, mapDispatchToProps)(ProductDetailPageWrapper);
 

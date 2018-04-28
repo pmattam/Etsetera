@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { tokenToStore } from "../actions/action-functions";
-import { registerUser } from "../lib/helper-functions";
+import { tokenToStore } from "../actions/action-fns";
+import { registerUser } from "../lib/api-calls";
 
 let RegisterUserWrapper = ({ users, props }) => {
 

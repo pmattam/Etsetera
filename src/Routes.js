@@ -14,7 +14,7 @@ let Routes = () =>
     <Router>
         <div>
             <Route exact path="/" component={Homepage} />
-            <Route exact path="/cart/:id" component={Cart} />  
+            <Route exact path="/cart/" component={Cart} />  
             <Route exact path="/category/:name" component={Category} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/product/:id" component={ProductDetailPage} />

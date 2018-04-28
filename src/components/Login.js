@@ -1,7 +1,7 @@
 import React from "react";
-import { fetchToken } from "../lib/helper-functions";
+import { fetchToken } from "../lib/api-calls";
 import { connect } from "react-redux";
-import { tokenToStore } from "../actions/action-functions";
+import { tokenToStore } from "../actions/action-fns";
 import { Link } from 'react-router-dom';
 
 let LoginWrapper = ({ props, tokenToStore }) => {
@@ -9,12 +9,12 @@ let LoginWrapper = ({ props, tokenToStore }) => {
     let userCredentials = {};
     
     let handleSubmit = event => {
-        console.log("handlesubmit", userCredentials);
         event.preventDefault();
         if(userCredentials.identifier && userCredentials.password) {
             fetchToken(userCredentials)
                 .then(res => res.json())
                 .then(token => {
+                    console.log("USER CREDENTIALS WHEN I LOG IN", token);
                     if(token.jwt) {
                         localStorage.setItem("authorization", token.jwt);
                         tokenToStore(userCredentials.identifier, token.jwt, token.user._id);
@@ -30,12 +30,10 @@ let LoginWrapper = ({ props, tokenToStore }) => {
 
     let readEmail = event => {
         userCredentials.identifier = event.target.value;
-        // console.log(userCredentials);
     };
 
     let readPassword = event => {
         userCredentials.password = event.target.value;
-        // console.log(userCredentials);
     };
 
     return (
@@ -45,14 +43,8 @@ let LoginWrapper = ({ props, tokenToStore }) => {
             </div>
             <div>
                 <form onSubmit={handleSubmit}>
-                    <label>
-                        Email:
-                        <input type="text" name="identifier" onChange={readEmail} />
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" name="password" onChange={readPassword} />
-                    </label>
+                        <input type="text" name="identifier" onChange={readEmail} placeholder="email" />
+                        <input type="password" name="password" onChange={readPassword} placeholder="password" />
                         <input type="submit" value="Submit" />
                 </form>
             </div>
@@ -69,7 +61,7 @@ let mapStateToProps = (state, props) => ({ state, props });
 
 let mapDispatchToProps = dispatch =>  { 
     return {
-        tokenToStore: (identifier, token, userid) => dispatch(tokenToStore(identifier, token, userid))
+        tokenToStore: (identifier, token, userId) => dispatch(tokenToStore(identifier, token, userId))
     };
 };
       
