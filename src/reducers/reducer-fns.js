@@ -11,6 +11,12 @@ export let editCartReducer = (state, action) => {
     };
 };
 
+export let removeCartReducer = (state, action) => {
+    return {...state,
+        cart: state.cart.filter(item => item._id != action.payload.cartItem._id)
+    };
+};
+
 export let fetchAllCartItemsReducer = (state, action) => ({
     ...state,
     cart: action.payload.cartItems

@@ -30,11 +30,11 @@ export let editQuantityInUserCart = (itemToEdit) => {
     })
 }
 
-export let removeItemFromUserCart = (productId, token_val) =>
-    fetch(`https://etsetera.herokuapp.com/cartItem/${productId}`, {
+export let removeItemFromUserCart = (cartItemId) =>
+    fetch(`https://etsetera.herokuapp.com/cartItem/${cartItemId}`, {
         method: "DELETE",
         headers: new Headers({
-            "Authorization": `Bearer ${token_val}`,
+            "Authorization": `Bearer ${localStorage.getItem("authorization")}`,
             "Content-Type": "application/json"
         })
     })

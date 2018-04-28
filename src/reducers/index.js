@@ -1,5 +1,5 @@
-import { addToCart, editCart, fetchAllCartItems, fetchCategories, fetchProducts, tokenToStore } from "../actions/action-fns";
-import { addToCartReducer, editCartReducer, fetchAllCartItemsReducer, fetchCategoriesReducer, fetchProductsReducer, tokenToStoreReducer } from "./reducer-fns";
+import { addToCart, editCart, fetchAllCartItems, fetchCategories, fetchProducts, removeCart, tokenToStore } from "../actions/action-fns";
+import { addToCartReducer, editCartReducer, fetchAllCartItemsReducer, fetchCategoriesReducer, fetchProductsReducer, removeCartReducer, tokenToStoreReducer } from "./reducer-fns";
 
 const initialState = {
     cart: [],
@@ -14,6 +14,7 @@ let reducers = {
     [fetchAllCartItems]: fetchAllCartItemsReducer,
     [fetchCategories]: fetchCategoriesReducer,
     [fetchProducts]: fetchProductsReducer,
+    [removeCart]: removeCartReducer,
     [tokenToStore]: tokenToStoreReducer
 };
 
