@@ -1,31 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
-import { editCart, removeCart } from "../actions/action-fns";
+import { editCartItem, removeCartItem } from "../actions/action-fns";
 import { editQuantityInUserCart, removeItemFromUserCart } from "../lib/api-calls";
 
-let CartWrapper = ({ cart, products, props, editCart, removeCart }) => {
+let CartWrapper = ({ cart, products, props, editCartItem, removeCartItem }) => {
     let itemToEdit = {};
     let qty = "1";
 
-    console.log("cart products", products);
-    console.log("cart", cart);
+    // console.log("cart products", products);
+    // console.log("cart", cart);
 
     let handleQuantity = (event) => {
         qty = event.target.value;
-        console.log("QUANTITY", qty);
+        // console.log("QUANTITY", qty);
     };
     
     let handleEditCartItem = (event, product, cartItem) => {
         itemToEdit.quantity = parseInt(qty, 10);
         itemToEdit.id = cartItem._id;
         itemToEdit.userId = cartItem.user._id;
-        console.log("inside cart", itemToEdit);
+        // console.log("inside cart", itemToEdit);
         editQuantityInUserCart(itemToEdit)
             .then(res => res.json())
             .then(response => {
-                console.log("response", response);
-                editCart(itemToEdit);
+                // console.log("response", response);
+                editCartItem(itemToEdit);
                 props.history.push("/cart");
             })
     };
@@ -35,8 +35,8 @@ let CartWrapper = ({ cart, products, props, editCart, removeCart }) => {
         removeItemFromUserCart(cartItemId)
             .then(res => res.json())
             .then(response => {
-                console.log("response", response);
-                removeCart(cartItem);
+                // console.log("response", response);
+                removeCartItem(cartItem);
                 props.history.push("/cart");
             })
     };
@@ -83,8 +83,8 @@ let mapStateToProps = (state, props) => ({ cart: state.cart, products: state.pro
 
 let mapDispatchToProps = dispatch => {
     return {
-        editCart: (itemToEdit) => dispatch(editCart(itemToEdit)),
-        removeCart: (cartItem) => dispatch(removeCart(cartItem))
+        editCartItem: (itemToEdit) => dispatch(editCartItem(itemToEdit)),
+        removeCartItem: (cartItem) => dispatch(removeCartItem(cartItem))
     };
 };
 

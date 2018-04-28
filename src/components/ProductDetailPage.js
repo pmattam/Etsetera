@@ -16,13 +16,13 @@ let ProductDetailPageWrapper = ({ cart, products, user, props, addToCart }) => {
     };
     
     let handleAddToCart = (event, product) => {
-        console.log("ALL THE PRODUCTS", product);
-        console.log("USER ID", user[0].userId);
+        // console.log("ALL THE PRODUCTS", product);
+        // console.log("USER ID", user[0].userId);
         itemToCart.quantity = qty;
         itemToCart.product = { "_id": product._id };
         itemToCart.user = { "_id": user[0].userId };
         let token_val = localStorage.getItem("authorization");
-        console.log(itemToCart);
+        // console.log(itemToCart);
         addItemToUserCart(itemToCart, token_val)
             .then(res => res.json())
             .then(response => {

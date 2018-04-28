@@ -1,4 +1,4 @@
-import { ADD_TO_CART, EDIT_CART, FETCH_ALL_CART_ITEMS, FETCH_CATEGORIES, FETCH_PRODUCTS, REMOVE_CART, TOKEN_TO_STORE } from "../constants/index";
+import { ADD_TO_CART, EDIT_CART_ITEM, FETCH_ALL_CART_ITEMS, FETCH_CATEGORIES, FETCH_PRODUCTS, REMOVE_CART_ITEM, TOKEN_TO_STORE } from "../constants/index";
 
 export let addToCart = (product, qty) => ({
     type: ADD_TO_CART,
@@ -7,19 +7,19 @@ export let addToCart = (product, qty) => ({
 
 addToCart.toString = () => ADD_TO_CART;
 
-export let editCart = (itemToEdit) => ({
-    type: EDIT_CART,
+export let editCartItem = (itemToEdit) => ({
+    type: EDIT_CART_ITEM,
     payload: { itemToEdit }
 });
 
-editCart.toString = () => EDIT_CART;
+editCartItem.toString = () => EDIT_CART_ITEM;
 
-export let removeCart = (cartItem) => ({
-    type: REMOVE_CART,
+export let removeCartItem = (cartItem) => ({
+    type: REMOVE_CART_ITEM,
     payload: { cartItem }
 });
 
-removeCart.toString = () => REMOVE_CART;
+removeCartItem.toString = () => REMOVE_CART_ITEM;
 
 export let fetchAllCartItems = (cartItems) => ({
     type: FETCH_ALL_CART_ITEMS,

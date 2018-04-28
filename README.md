@@ -1,1 +1,1 @@
-Etsetera
+Etsetera - ecommerce shopping using react-redux

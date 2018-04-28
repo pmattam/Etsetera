@@ -28,7 +28,7 @@ export let editQuantityInUserCart = (itemToEdit) => {
             "Content-Type": "application/json"
         })
     })
-}
+};
 
 export let removeItemFromUserCart = (cartItemId) =>
     fetch(`https://etsetera.herokuapp.com/cartItem/${cartItemId}`, {

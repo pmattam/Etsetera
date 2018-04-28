@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 
 class HomepageWrapper extends Component {
+    
     componentDidMount() {
-
         getCategories()
             .then(res => res.json())
             .then(categories => { 

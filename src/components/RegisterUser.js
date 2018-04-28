@@ -8,18 +8,18 @@ let RegisterUserWrapper = ({ users, props }) => {
     let userCredentials = {};
      
     let handleSubmit = event => {
-        console.log("handlesubmit", userCredentials);
+        // console.log("handlesubmit", userCredentials);
         event.preventDefault();
         if(userCredentials.username && userCredentials.email && userCredentials.password) {
             registerUser(userCredentials)
                 .then(res => res.json())
                 .then(response => {
-                    console.log("RES", response);
+                    // console.log("RES", response);
                     if(response.jwt) {
-                        console.log(response.jwt);
+                        // console.log(response.jwt);
                         localStorage.setItem("authorization", response.jwt);
                         tokenToStore(response.user.email, response.jwt);
-                        console.log(props);
+                        // console.log(props);
                         props.history.push("/");
                     } else {
                         alert("Can't Register you in");
